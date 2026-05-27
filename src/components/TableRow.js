@@ -4,10 +4,12 @@
       row - данные для формирования ячеек строки таблицы в виде массива
 */
 const TableRow = (props) => {
-    const cells = props.row.map((item, index) => <td key={ index }> { item } </td>); 
-    return(
-        <> 
-           { cells } 
+    const cells = (props.isHead == 0)
+        ? props.row.map((item, index) => <td key={index}> {item} </td>)
+        : props.row.map((item, index) => <th key={index}> {item} </th>);
+    return (
+        <>
+            {cells}
         </>
     )
 }
