@@ -1,25 +1,15 @@
 import logo from './images/logo.svg';
 import './CSS/App.css';
+import TableRow from './components/TableRow';
+import buildings from './data';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h3>Самые высокие здания и сооружения</h3>
+      <TableRow row={Object.keys(buildings[0])} isHead = "1" />
+      <TableRow row={Object.values(buildings[0])} isHead = "0" />
     </div>
   );
 }
-
 export default App;
