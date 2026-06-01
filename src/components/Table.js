@@ -1,6 +1,6 @@
 import TableHead from './TableHead.js';
 import TableBody from './TableBody.js';
-
+import { useState } from "react";
 /*
    компонент, выводящий на страницу таблицу с пагинацией
    пропсы:
@@ -9,8 +9,13 @@ import TableBody from './TableBody.js';
 
 const Table = (props) => {
 
+  const [activePage, setActivePage] = useState("1");
+  const changeActive = (event) => {
+    setActivePage(event.target.innerHTML);
+  };
+
   const showPagination = props.showPagination;
-  const numPage = props.numPage;
+  
   if (showPagination == "True") {
     //количество страниц разбиения таблицы
     const n = Math.ceil(props.data.length / props.amountRows);
@@ -23,13 +28,13 @@ const Table = (props) => {
       if (cur == numPage) return "pagination__curPage"
     }
     const pages = arr.map((item, index) =>
-      <span key={index} className={isCurPage(item, numPage)}> {item} </span>
+      <span key={index} className={isCurPage(item, activePage)} onClick={changeActive}> {item} </span>
     );
     return (
       <>
         <table>
           <TableHead head={Object.keys(props.data[0])} />
-          <TableBody body={props.data} amountRows={props.amountRows} numPage />
+          <TableBody body={props.data} amountRows={props.amountRows} numPage={activePage} />
         </table>
 
         <div className="pagination">

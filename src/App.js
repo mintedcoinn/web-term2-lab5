@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
        <h3>Самые высокие здания и сооружения</h3>
-       <Table data={ buildings } amountRows="15" numPage="3" showPagination="false"/>
+       <Table data={ buildings } amountRows="15" showPagination="True"/>
     </div>
   );
 }

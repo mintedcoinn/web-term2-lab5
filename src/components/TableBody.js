@@ -7,7 +7,6 @@ import TableSeparater from './TableSeparater.js';
       body - данные для таблицы в виде массива объектов
       numPage - номер текущей страницы
       amountRows - количество строк таблицы на странице
-      separatorAfter - индекс строки, после которой вставить разделитель (опционально)
 */
 
 const TableBody = (props) => {
