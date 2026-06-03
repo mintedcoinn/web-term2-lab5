@@ -38,3 +38,23 @@ th {
     padding: 12px 0;
     border: none;
 }
+
+form {
+    margin-left: 20px;
+}
+
+form label {
+    display: inline-block;
+    width: 80px;
+    text-align: right;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+form button {
+    margin: 5px;
+}
+
+h4, h3 {
+    margin: 20px;
+}
