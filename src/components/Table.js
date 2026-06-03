@@ -1,5 +1,6 @@
 import TableHead from './TableHead.js';
 import TableBody from './TableBody.js';
+import Filter from './Filter.js';
 import { useState } from "react";
 /*
    компонент, выводящий на страницу таблицу с пагинацией
@@ -14,27 +15,35 @@ const Table = (props) => {
     setActivePage(event.target.innerHTML);
   };
 
+  const [dataTable, setDataTable] = useState(props.data);
+  const updateDataTable = (value) => { 
+    setDataTable(value);
+    setActivePage('1');
+   };
+
   const showPagination = props.showPagination;
-  
-  if (showPagination == "True") {
+
+  if (showPagination === "True") {
     //количество страниц разбиения таблицы
-    const n = Math.ceil(props.data.length / props.amountRows);
+    const n = Math.ceil(dataTable.length / props.amountRows);
 
     // массив с номерами страниц
     const arr = Array.from({ length: n }, (v, i) => i + 1);
 
     //формируем совокупность span с номерами страниц
     const isCurPage = (cur, numPage) => {
-      if (cur == numPage) return "pagination__curPage"
+      if (cur === numPage) return "pagination__curPage"
     }
     const pages = arr.map((item, index) =>
       <span key={index} className={isCurPage(item, activePage)} onClick={changeActive}> {item} </span>
     );
     return (
       <>
+        <h4>Фильтры</h4>
+        <Filter filtering={updateDataTable} data={dataTable} fullData={props.data} />
         <table>
           <TableHead head={Object.keys(props.data[0])} />
-          <TableBody body={props.data} amountRows={props.amountRows} numPage={activePage} />
+          <TableBody body={dataTable} amountRows={props.amountRows} numPage={activePage} />
         </table>
 
         <div className="pagination">
@@ -46,10 +55,12 @@ const Table = (props) => {
   } else {
     return (
       <>
+        <h4>Фильтры</h4>
+        <Filter filtering={updateDataTable} data={dataTable} fullData={props.data} />
         <table>
           <TableHead head={Object.keys(props.data[0])} />
           <TableBody
-            body={props.data}
+            body={dataTable}
             amountRows={props.data.length}
             numPage={1}
             separatorAfter={Number(props.amountRows) - 1}
