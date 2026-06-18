@@ -23,7 +23,7 @@ const Table = (props) => {
 
   const showPagination = props.showPagination;
 
-  if (showPagination === "True") {
+  if (showPagination === true) {
     //количество страниц разбиения таблицы
     const n = Math.ceil(dataTable.length / props.amountRows);
 
