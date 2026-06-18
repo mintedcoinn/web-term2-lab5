@@ -10,16 +10,18 @@ import { useState } from "react";
 
 const Table = (props) => {
 
-  const [activePage, setActivePage] = useState("1");
+  const activePage = props.activePage;
+  const setActivePage = props.setActivePage;
+  const dataTable = props.data;
+
   const changeActive = (event) => {
     setActivePage(event.target.innerHTML);
   };
 
-  const [dataTable, setDataTable] = useState(props.data);
-  const updateDataTable = (value) => { 
-    setDataTable(value);
+  const updateDataTable = (value) => {
+    props.updateDataTable(value);
     setActivePage('1');
-   };
+  };
 
   const showPagination = props.showPagination;
 
@@ -40,7 +42,7 @@ const Table = (props) => {
     return (
       <>
         <h4>Фильтры</h4>
-        <Filter filtering={updateDataTable} data={dataTable} fullData={props.data} />
+        <Filter filtering={updateDataTable} data={dataTable} fullData={props.fullData} />
         <table>
           <TableHead head={Object.keys(props.data[0])} />
           <TableBody body={dataTable} amountRows={props.amountRows} numPage={activePage} />
@@ -56,7 +58,7 @@ const Table = (props) => {
     return (
       <>
         <h4>Фильтры</h4>
-        <Filter filtering={updateDataTable} data={dataTable} fullData={props.data} />
+        <Filter filtering={updateDataTable} data={dataTable} fullData={props.fullData} />
         <table>
           <TableHead head={Object.keys(props.data[0])} />
           <TableBody
