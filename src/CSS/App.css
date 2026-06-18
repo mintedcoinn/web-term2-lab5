@@ -58,3 +58,28 @@ form button {
 h4, h3 {
     margin: 20px;
 }
+
+svg {
+    width: 800px;
+    height: 400px;
+}
+
+svg path, line {
+    fill: none;
+    stroke: black;
+    width: 1px;
+}
+ 
+svg text {
+    font: 8px Verdana;
+}
+
+.error {
+    border: 2px solid red;
+}
+
+.oy label {
+    display: block;
+    width: 200px;
+    text-align: left;
+}
