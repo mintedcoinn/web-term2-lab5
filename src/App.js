@@ -10,16 +10,10 @@ function App() {
   const amountRows = 15;
 
 
-  const currentPageData = filteredData.slice(
-    (activePage - 1) * amountRows,
-    activePage * amountRows
-  );
-
-
   return (
     <div className="App">
       <h3>Самые высокие здания и сооружения</h3>
-      <Chart data={currentPageData} />
+      <Chart data={filteredData} />
       <Table
         data={filteredData}
         fullData={buildings}

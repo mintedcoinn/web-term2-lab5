@@ -15,7 +15,7 @@ const Table = (props) => {
   const dataTable = props.data;
 
   const changeActive = (event) => {
-    setActivePage(event.target.innerHTML);
+    setActivePage(Number(event.target.innerHTML));
   };
 
   const updateDataTable = (value) => {

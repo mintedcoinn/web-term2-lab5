@@ -6,20 +6,28 @@ const Chart = (props) => {
     const [ox, setOx] = useState("Страна");
     const [oy, setOy] = useState([true, false]);
     const [type, setType] = useState("gisto");
+    const [showError, setShowError] = useState(false);
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
         setOx(event.target["ox"].value);
         setOy([event.target["oy"][0].checked, event.target["oy"][1].checked]);
+        checkOy(event.target["oy"]);
         setType(event.target["type"].value);
+
     }
 
-    const checkOy = () => {
-        if (!(oy[0] || oy[1])) {
-            return "error";
+    const handleCheck = (event) => {
+        setShowError(false);
+
+    }
+    const checkOy = (oy) => {
+        if (!(oy[0].checked || oy[1].checked)) {
+            setShowError(true);
         }
     }
-
 
     const createArrGraph = (data, key) => {
         const groupObj = d3.group(data, d => d[key]);
@@ -50,12 +58,12 @@ const Chart = (props) => {
 
                 <p> Значение по оси OY </p>
                 <div className="oy">
-                    <label className={checkOy()}>
-                        <input type="checkbox" name="oy" defaultChecked={oy[0] === true} />
+                    <label className={showError ? "error" : ""}  >
+                        <input type="checkbox" name="oy" defaultChecked={oy[0] === true} onChange={handleCheck} />
                         Максимальная высота <br />
                     </label>
-                    <label className={checkOy()}>
-                        <input type="checkbox" name="oy" />
+                    <label className={showError ? "error" : ""}>
+                        <input type="checkbox" name="oy" onChange={handleCheck} />
                         Минимальная высота
                     </label>
                 </div>
@@ -72,7 +80,7 @@ const Chart = (props) => {
 
 
             </form>
-            <ChartDraw data={createArrGraph(props.data, ox)} minMax={oy} type={type}/>
+            <ChartDraw data={createArrGraph(props.data, ox)} minMax={oy} type={type} />
         </>
     )
 }

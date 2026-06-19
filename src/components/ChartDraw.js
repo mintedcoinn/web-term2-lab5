@@ -94,12 +94,16 @@ const ChartDraw = (props) => {
     }, [scaleX, scaleY, props.data]);
 
     const createDotChart = (indexOY, svg, color) => {
+        const bias =
+            props.minMax[0] && props.minMax[1]
+                ? (indexOY ? -6 : 6)
+                : 0;
         return svg.selectAll(".dot")
             .data(props.data)
             .enter()
             .append("circle")
             .attr("r", 5)
-            .attr("cx", d => scaleX(d.labelX) + scaleX.bandwidth() / 2)
+            .attr("cx", d => scaleX(d.labelX) + scaleX.bandwidth() / 2 + bias)
             .attr("cy", d => scaleY(d.values[indexOY]))
             .attr("transform", `translate(${margin.left}, ${margin.top})`)
             .style("fill", color)
